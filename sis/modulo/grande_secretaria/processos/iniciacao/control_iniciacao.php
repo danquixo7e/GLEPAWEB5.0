@@ -207,5 +207,70 @@ switch ($acao){
         }
         echo json_encode($retorno);
         break;
+    case 'sendLiberaProcesso':
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $readProcesso = read('glepaweb_processos',"WHERE id = '$id'");
+        if($readProcesso){
+            foreach ($readProcesso as $processo);
+            $readDados = read('glepaweb_dados_processos',"WHERE id_processo = '$id'");
+            if($readDados){
+                foreach ($readDados as $dados);
+            }
+            if($dados['senior_demolay'] !== '1'){
+                $b['id_loja'] = $processo['id_loja'];
+                $b['id_tipo_cobranca'] = '6';
+                $b['id_processo'] = $processo['id'];
+                $b['data_vencimento'] = date('Y-m-d',strtotime("-3 days", strtotime($processo['data_cerimonial'])));
+                $b['data_documento'] = date('Y-m-d');
+                $b['valor'] = get('glepaweb_tipo_cobranca', id, '6', valor);
+                $b['nosso_numero'] = '06'.str_pad(get('glepaweb_lojas', 'id', $processo['id_loja'], 'numero'), 3 , "0", STR_PAD_LEFT).str_pad($processo['id'], 5 , "0", STR_PAD_LEFT);
+                $b['ano'] = date('Y');
+                $b['mes'] = date('m');
+                create('glepaweb_boletos',$b);
+            }else{
+                $f['pagamento_glepa'] = '1';
+            }
+            $idade = calculaIdade($dados['data_nascimento']);
+            if($idade < 66){
+                if($dados['senior_demolay'] === '1'){
+                    $b['id_loja'] = $processo['id_loja'];
+                    $b['id_tipo_cobranca'] = '9';
+                    $b['data_vencimento'] = date('Y-m-d',strtotime("-3 days", strtotime($processo['data_cerimonial'])));
+                    $b['data_documento'] = date('Y-m-d');
+                    $b['ano'] = date('Y');
+                    $b['mes'] = date('m');
+                    $valor = 100;
+                    //$valor = round(((get('glepaweb_tipo_cobranca', 'id', '9', 'valor') * 20) / 100), 1);
+                    $b['valor'] = $valor;
+                    $b['nosso_numero'] = '009'.str_pad(get('glepaweb_lojas', 'id', $processo['id_loja'], 'numero'), 3 , "0", STR_PAD_LEFT).str_pad($processo['id'], 5 , "0", STR_PAD_LEFT);
+                    $b['id_processo'] = $processo['id'];
+                    create('glepaweb_boletos', $b);
+                }else{
+                    $b['id_loja'] = $processo['id_loja'];
+                    $b['id_tipo_cobranca'] = '9';
+                    $b['data_vencimento'] = date('Y-m-d',strtotime("-3 days", strtotime($processo['data_cerimonial'])));
+                    $b['data_documento'] = date('Y-m-d');
+                    $b['ano'] = date('Y');
+                    $b['mes'] = date('m');
+                    $valor = 100;
+                    //$valor = round(((get('glepaweb_tipo_cobranca', 'id', '9', 'valor') * 20) / 100), 1);
+                    $b['valor'] = $valor;
+                    $b['nosso_numero'] = '009'.str_pad(get('glepaweb_lojas', 'id', $processo['id_loja'], 'numero'), 3 , "0", STR_PAD_LEFT).str_pad($processo['id'], 5 , "0", STR_PAD_LEFT);
+                    $b['id_processo'] = $processo['id'];
+                    create('glepaweb_boletos', $b);
+                }
+            }else{
+                $f['pagamento_beneficencia'] = '1';
+            }
+            $f['data_cerimonial_aprovado'] = '1';
+            $f['id_etapa'] = '0';
+            $f['id_status'] = '4';
+            update('glepaweb_processos', $f, "id = '$processo[id]'");
+            $retorno['sucesso'] = true;
+        }else{
+            $retorno['sucesso'] = false;
+        }
+        echo json_encode($retorno);
+        break;
     default: echo 'Error';
 }

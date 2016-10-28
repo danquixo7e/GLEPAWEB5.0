@@ -597,3 +597,53 @@ $('.reprovaData').click(function () {
         }
     });
 });
+
+$('.aprovaData').click(function () {
+    var id_processo = $(this).attr('id');
+    swal({
+        title: "Liberar Processo",
+        text: "Você tem certeza que deseja liberar este processo?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-warning",
+        confirmButtonText: "Sim, liberar",
+        cancelButtonText: "Não",
+        showLoaderOnConfirm: true,
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function (isConfirm) {
+        if (isConfirm) {
+            $.ajax({
+                url: 'modulo/grande_secretaria/processos/iniciacao/control_iniciacao.php',
+                data: {acao: 'sendLiberaProcesso', id: id_processo},
+                type: 'POST',
+                beforeSend: function () {
+
+                },
+                success: function (res) {
+                    resposta = $.parseJSON(res);
+                    if (resposta.sucesso === true) {
+                        swal("Liberado!", "O processo foi liberado com sucesso.", "success");
+                        $.ajax({
+                            url: 'modulo/grande_secretaria/processos/processos_pendentes.php',
+                            success: function (res) {
+                                $('.page-content .page-content-body').html(res);
+                                Layout.fixContentHeight();
+                                App.initAjax();
+                            }
+                        });
+                    } else {
+                        swal("Erro!", "Não foi possível liberar o processo.", "error");
+                    }
+
+                },
+                complete: function () {
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+    });
+});
