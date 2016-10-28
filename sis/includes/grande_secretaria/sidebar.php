@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="heading">
-                <h3 class="uppercase">Grão-Mestre</h3>
+                <h3 class="uppercase">Grande Secretaria</h3>
             </li>
             <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">

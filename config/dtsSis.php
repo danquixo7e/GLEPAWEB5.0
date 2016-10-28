@@ -74,3 +74,36 @@ function sendMail($assunto, $mensagem, $remetente, $nomeRemetente, $destino, $no
         return false;
     }
 }
+
+function validaData($data){
+    if(!empty($data) && $data !== '1969-12-31'){
+        $data = mysql_real_escape_string($data);
+        $data = split("[-,/]", $data);
+        if(!checkdate($data[1], $data[0], $data[2]) and !checkdate($data[1], $data[2], $data[0])) {
+            return false;
+        }
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function formDate($data) {
+    if ($data == '') {
+        return $data;
+    } else {
+        $resultado = implode("-", array_reverse(explode("/", $data)));
+        return $resultado;
+    }
+}
+
+function formNome($string){
+    return strtoupper(strtr(utf8_decode($string),utf8_decode("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"),"SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy"));
+}
+
+function calculaIdade($data_nascimento)	{
+    $data_nascimento = strtotime($data_nascimento." 00:00:00");
+    $data_calcula = strtotime(date('Y-m-d')." 00:00:00");
+    $idade = floor(abs($data_calcula-$data_nascimento)/60/60/24/365);
+    return $idade;
+}

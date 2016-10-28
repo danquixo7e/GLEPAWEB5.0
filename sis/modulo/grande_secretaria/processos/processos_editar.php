@@ -20,6 +20,7 @@ if($readProcesso){
     header('Location: ' . BASE . '/sis/404.php');
 }
 ?>
+
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -57,13 +58,13 @@ if($readProcesso){
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>
-                                <a href="modulo/grande_secretaria/processos/processos_analisar.php?id=<?php echo $value['id']; ?>">
+                                <a href="<?php echo get(glepaweb_tipo_processos, id, $value['id_tipo'], url_grande_secretaria).$value['id']; ?>" class="ajaxify">
                                     <i class="fa fa-search"></i> Analisar </a>
                             </li>
                             <li>
                                 <a href="javascript:;">
-                                    <i class="fa fa-print"></i> Imprimir </a>
-                            </li>                            
+                                    <i class="fa fa-print"></i> Imprimir Processo</a>
+                            </li>                           
                         </ul>
                     </div>
                 </div>

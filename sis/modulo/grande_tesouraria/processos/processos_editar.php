@@ -62,8 +62,12 @@ if($readProcesso){
                             </li>
                             <li>
                                 <a href="javascript:;">
-                                    <i class="fa fa-print"></i> Imprimir </a>
-                            </li>                            
+                                    <i class="fa fa-print"></i> Imprimir Processo</a>
+                            </li>     
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-print"></i> Imprimir Boleto </a>
+                            </li> 
                         </ul>
                     </div>
                 </div>

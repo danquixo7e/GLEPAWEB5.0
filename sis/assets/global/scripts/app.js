@@ -1,7 +1,7 @@
 /**
-Core script to handle the entire theme and core functions
-**/
-var App = function() {
+ Core script to handle the entire theme and core functions
+ **/
+var App = function () {
 
     // IE mode
     var isRTL = false;
@@ -31,7 +31,7 @@ var App = function() {
     };
 
     // initializes main settings
-    var handleInit = function() {
+    var handleInit = function () {
 
         if ($('body').css('direction') === 'rtl') {
             isRTL = true;
@@ -51,7 +51,7 @@ var App = function() {
     };
 
     // runs callback functions set by App.addResponsiveHandler().
-    var _runResizeHandlers = function() {
+    var _runResizeHandlers = function () {
         // reinitialize other subscribed elements
         for (var i = 0; i < resizeHandlers.length; i++) {
             var each = resizeHandlers[i];
@@ -60,28 +60,28 @@ var App = function() {
     };
 
     // handle the layout reinitialization on window resize
-    var handleOnResize = function() {
+    var handleOnResize = function () {
         var resize;
         if (isIE8) {
             var currheight;
-            $(window).resize(function() {
+            $(window).resize(function () {
                 if (currheight == document.documentElement.clientHeight) {
                     return; //quite event since only body resized not window.
                 }
                 if (resize) {
                     clearTimeout(resize);
                 }
-                resize = setTimeout(function() {
+                resize = setTimeout(function () {
                     _runResizeHandlers();
                 }, 50); // wait 50ms until window resize finishes.                
                 currheight = document.documentElement.clientHeight; // store last body client height
             });
         } else {
-            $(window).resize(function() {
+            $(window).resize(function () {
                 if (resize) {
                     clearTimeout(resize);
                 }
-                resize = setTimeout(function() {
+                resize = setTimeout(function () {
                     _runResizeHandlers();
                 }, 50); // wait 50ms until window resize finishes.
             });
@@ -89,9 +89,9 @@ var App = function() {
     };
 
     // Handles portlet tools & actions
-    var handlePortletTools = function() {
+    var handlePortletTools = function () {
         // handle portlet remove
-        $('body').on('click', '.portlet > .portlet-title > .tools > a.remove', function(e) {
+        $('body').on('click', '.portlet > .portlet-title > .tools > a.remove', function (e) {
             e.preventDefault();
             var portlet = $(this).closest(".portlet");
 
@@ -109,7 +109,7 @@ var App = function() {
         });
 
         // handle portlet fullscreen
-        $('body').on('click', '.portlet > .portlet-title .fullscreen', function(e) {
+        $('body').on('click', '.portlet > .portlet-title .fullscreen', function (e) {
             e.preventDefault();
             var portlet = $(this).closest(".portlet");
             if (portlet.hasClass('portlet-fullscreen')) {
@@ -119,9 +119,9 @@ var App = function() {
                 portlet.children('.portlet-body').css('height', 'auto');
             } else {
                 var height = App.getViewPort().height -
-                    portlet.children('.portlet-title').outerHeight() -
-                    parseInt(portlet.children('.portlet-body').css('padding-top')) -
-                    parseInt(portlet.children('.portlet-body').css('padding-bottom'));
+                        portlet.children('.portlet-title').outerHeight() -
+                        parseInt(portlet.children('.portlet-body').css('padding-top')) -
+                        parseInt(portlet.children('.portlet-body').css('padding-bottom'));
 
                 $(this).addClass('on');
                 portlet.addClass('portlet-fullscreen');
@@ -130,7 +130,7 @@ var App = function() {
             }
         });
 
-        $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function(e) {
+        $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function (e) {
             e.preventDefault();
             var el = $(this).closest(".portlet").children(".portlet-body");
             var url = $(this).attr("data-url");
@@ -146,12 +146,12 @@ var App = function() {
                     cache: false,
                     url: url,
                     dataType: "html",
-                    success: function(res) {
+                    success: function (res) {
                         App.unblockUI(el);
                         el.html(res);
                         App.initAjax() // reinitialize elements & plugins for newly loaded content
                     },
-                    error: function(xhr, ajaxOptions, thrownError) {
+                    error: function (xhr, ajaxOptions, thrownError) {
                         App.unblockUI(el);
                         var msg = 'Error on reloading the content. Please check your connection and try again.';
                         if (error == "toastr" && toastr) {
@@ -174,7 +174,7 @@ var App = function() {
                     animate: true,
                     overlayColor: 'none'
                 });
-                window.setTimeout(function() {
+                window.setTimeout(function () {
                     App.unblockUI(el);
                 }, 1000);
             }
@@ -183,7 +183,7 @@ var App = function() {
         // load ajax data on page init
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
 
-        $('body').on('click', '.portlet > .portlet-title > .tools > .collapse, .portlet .portlet-title > .tools > .expand', function(e) {
+        $('body').on('click', '.portlet > .portlet-title > .tools > .collapse, .portlet .portlet-title > .tools > .expand', function (e) {
             e.preventDefault();
             var el = $(this).closest(".portlet").children(".portlet-body");
             if ($(this).hasClass("collapse")) {
@@ -195,76 +195,76 @@ var App = function() {
             }
         });
     };
-    
+
     // Handlesmaterial design checkboxes
-    var handleMaterialDesign = function() {
+    var handleMaterialDesign = function () {
 
         // Material design ckeckbox and radio effects
-        $('body').on('click', '.md-checkbox > label, .md-radio > label', function() {
+        $('body').on('click', '.md-checkbox > label, .md-radio > label', function () {
             var the = $(this);
             // find the first span which is our circle/bubble
             var el = $(this).children('span:first-child');
-              
+
             // add the bubble class (we do this so it doesnt show on page load)
             el.addClass('inc');
-              
+
             // clone it
-            var newone = el.clone(true);  
-              
+            var newone = el.clone(true);
+
             // add the cloned version before our original
-            el.before(newone);  
-              
+            el.before(newone);
+
             // remove the original so that it is ready to run on next click
             $("." + el.attr("class") + ":last", the).remove();
-        }); 
+        });
 
-        if ($('body').hasClass('page-md')) { 
+        if ($('body').hasClass('page-md')) {
             // Material design click effect
             // credit where credit's due; http://thecodeplayer.com/walkthrough/ripple-click-effect-google-material-design       
             var element, circle, d, x, y;
-            $('body').on('click', 'a.btn, button.btn, input.btn, label.btn', function(e) { 
+            $('body').on('click', 'a.btn, button.btn, input.btn, label.btn', function (e) {
                 element = $(this);
-      
-                if(element.find(".md-click-circle").length == 0) {
+
+                if (element.find(".md-click-circle").length == 0) {
                     element.prepend("<span class='md-click-circle'></span>");
                 }
-                    
+
                 circle = element.find(".md-click-circle");
                 circle.removeClass("md-click-animate");
-                
-                if(!circle.height() && !circle.width()) {
+
+                if (!circle.height() && !circle.width()) {
                     d = Math.max(element.outerWidth(), element.outerHeight());
                     circle.css({height: d, width: d});
                 }
-                
-                x = e.pageX - element.offset().left - circle.width()/2;
-                y = e.pageY - element.offset().top - circle.height()/2;
-                
-                circle.css({top: y+'px', left: x+'px'}).addClass("md-click-animate");
 
-                setTimeout(function() {
-                    circle.remove();      
+                x = e.pageX - element.offset().left - circle.width() / 2;
+                y = e.pageY - element.offset().top - circle.height() / 2;
+
+                circle.css({top: y + 'px', left: x + 'px'}).addClass("md-click-animate");
+
+                setTimeout(function () {
+                    circle.remove();
                 }, 1000);
             });
         }
 
         // Floating labels
-        var handleInput = function(el) {
+        var handleInput = function (el) {
             if (el.val() != "") {
                 el.addClass('edited');
             } else {
                 el.removeClass('edited');
             }
-        } 
+        }
 
-        $('body').on('keydown', '.form-md-floating-label .form-control', function(e) { 
+        $('body').on('keydown', '.form-md-floating-label .form-control', function (e) {
             handleInput($(this));
         });
-        $('body').on('blur', '.form-md-floating-label .form-control', function(e) { 
+        $('body').on('blur', '.form-md-floating-label .form-control', function (e) {
             handleInput($(this));
-        });        
+        });
 
-        $('.form-md-floating-label .form-control').each(function(){
+        $('.form-md-floating-label .form-control').each(function () {
             if ($(this).val().length > 0) {
                 $(this).addClass('edited');
             }
@@ -272,12 +272,12 @@ var App = function() {
     }
 
     // Handles custom checkboxes & radios using jQuery iCheck plugin
-    var handleiCheck = function() {
+    var handleiCheck = function () {
         if (!$().iCheck) {
             return;
         }
 
-        $('.icheck').each(function() {
+        $('.icheck').each(function () {
             var checkboxClass = $(this).attr('data-checkbox') ? $(this).attr('data-checkbox') : 'icheckbox_minimal-grey';
             var radioClass = $(this).attr('data-radio') ? $(this).attr('data-radio') : 'iradio_minimal-grey';
 
@@ -297,7 +297,7 @@ var App = function() {
     };
 
     // Handles Bootstrap switches
-    var handleBootstrapSwitch = function() {
+    var handleBootstrapSwitch = function () {
         if (!$().bootstrapSwitch) {
             return;
         }
@@ -305,26 +305,26 @@ var App = function() {
     };
 
     // Handles Bootstrap confirmations
-    var handleBootstrapConfirmation = function() {
+    var handleBootstrapConfirmation = function () {
         if (!$().confirmation) {
             return;
         }
-        $('[data-toggle=confirmation]').confirmation({ btnOkClass: 'btn btn-sm btn-success', btnCancelClass: 'btn btn-sm btn-danger'});
+        $('[data-toggle=confirmation]').confirmation({btnOkClass: 'btn btn-sm btn-success', btnCancelClass: 'btn btn-sm btn-danger'});
     }
-    
+
     // Handles Bootstrap Accordions.
-    var handleAccordions = function() {
-        $('body').on('shown.bs.collapse', '.accordion.scrollable', function(e) {
+    var handleAccordions = function () {
+        $('body').on('shown.bs.collapse', '.accordion.scrollable', function (e) {
             App.scrollTo($(e.target));
         });
     };
 
     // Handles Bootstrap Tabs.
-    var handleTabs = function() {
+    var handleTabs = function () {
         //activate tab if tab id provided in the URL
         if (location.hash) {
             var tabid = encodeURI(location.hash.substr(1));
-            $('a[href="#' + tabid + '"]').parents('.tab-pane:hidden').each(function() {
+            $('a[href="#' + tabid + '"]').parents('.tab-pane:hidden').each(function () {
                 var tabid = $(this).attr("id");
                 $('a[href="#' + tabid + '"]').click();
             });
@@ -339,9 +339,9 @@ var App = function() {
     };
 
     // Handles Bootstrap Modals.
-    var handleModals = function() {        
+    var handleModals = function () {
         // fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class. 
-        $('body').on('hide.bs.modal', function() {
+        $('body').on('hide.bs.modal', function () {
             if ($('.modal:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
                 $('html').addClass('modal-open');
             } else if ($('.modal:visible').size() <= 1) {
@@ -350,14 +350,14 @@ var App = function() {
         });
 
         // fix page scrollbars issue
-        $('body').on('show.bs.modal', '.modal', function() {
+        $('body').on('show.bs.modal', '.modal', function () {
             if ($(this).hasClass("modal-scroll")) {
                 $('body').addClass("modal-open-noscroll");
             }
         });
 
         // fix page scrollbars issue
-        $('body').on('hidden.bs.modal', '.modal', function() {
+        $('body').on('hidden.bs.modal', '.modal', function () {
             $('body').removeClass("modal-open-noscroll");
         });
 
@@ -368,7 +368,7 @@ var App = function() {
     };
 
     // Handles Bootstrap Tooltips.
-    var handleTooltips = function() {
+    var handleTooltips = function () {
         // global tooltips
         $('.tooltips').tooltip();
 
@@ -401,44 +401,44 @@ var App = function() {
     };
 
     // Handles Bootstrap Dropdowns
-    var handleDropdowns = function() {
+    var handleDropdowns = function () {
         /*
-          Hold dropdown on click  
-        */
-        $('body').on('click', '.dropdown-menu.hold-on-click', function(e) {
+         Hold dropdown on click  
+         */
+        $('body').on('click', '.dropdown-menu.hold-on-click', function (e) {
             e.stopPropagation();
         });
     };
 
-    var handleAlerts = function() {
-        $('body').on('click', '[data-close="alert"]', function(e) {
+    var handleAlerts = function () {
+        $('body').on('click', '[data-close="alert"]', function (e) {
             $(this).parent('.alert').hide();
             $(this).closest('.note').hide();
             e.preventDefault();
         });
 
-        $('body').on('click', '[data-close="note"]', function(e) {
+        $('body').on('click', '[data-close="note"]', function (e) {
             $(this).closest('.note').hide();
             e.preventDefault();
         });
 
-        $('body').on('click', '[data-remove="note"]', function(e) {
+        $('body').on('click', '[data-remove="note"]', function (e) {
             $(this).closest('.note').remove();
             e.preventDefault();
         });
     };
 
     // Handle Hower Dropdowns
-    var handleDropdownHover = function() {
-        $('[data-hover="dropdown"]').not('.hover-initialized').each(function() {
+    var handleDropdownHover = function () {
+        $('[data-hover="dropdown"]').not('.hover-initialized').each(function () {
             $(this).dropdownHover();
             $(this).addClass('hover-initialized');
         });
     };
 
     // Handle textarea autosize 
-    var handleTextareaAutosize = function() {
-        if (typeof(autosize) == "function") {
+    var handleTextareaAutosize = function () {
+        if (typeof (autosize) == "function") {
             autosize(document.querySelector('textarea.autosizeme'));
         }
     }
@@ -448,12 +448,12 @@ var App = function() {
     // last popep popover
     var lastPopedPopover;
 
-    var handlePopovers = function() {
+    var handlePopovers = function () {
         $('.popovers').popover();
 
         // close last displayed popover
 
-        $(document).on('click.bs.popover.data-api', function(e) {
+        $(document).on('click.bs.popover.data-api', function (e) {
             if (lastPopedPopover) {
                 lastPopedPopover.popover('hide');
             }
@@ -461,12 +461,12 @@ var App = function() {
     };
 
     // Handles scrollable contents using jQuery SlimScroll plugin.
-    var handleScrollers = function() {
+    var handleScrollers = function () {
         App.initSlimScroll('.scroller');
     };
 
     // Handles Image Preview using jQuery Fancybox plugin
-    var handleFancybox = function() {
+    var handleFancybox = function () {
         if (!jQuery.fancybox) {
             return;
         }
@@ -487,7 +487,7 @@ var App = function() {
     };
 
     // Handles counterup plugin wrapper
-    var handleCounterup = function() {
+    var handleCounterup = function () {
         if (!$().counterUp) {
             return;
         }
@@ -499,24 +499,24 @@ var App = function() {
     };
 
     // Fix input placeholder issue for IE8 and IE9
-    var handleFixInputPlaceholderForIE = function() {
+    var handleFixInputPlaceholderForIE = function () {
         //fix html5 placeholder attribute for ie7 & ie8
         if (isIE8 || isIE9) { // ie8 & ie9
             // this is html5 placeholder fix for inputs, inputs with placeholder-no-fix class will be skipped(e.g: we need this for password fields)
-            $('input[placeholder]:not(.placeholder-no-fix), textarea[placeholder]:not(.placeholder-no-fix)').each(function() {
+            $('input[placeholder]:not(.placeholder-no-fix), textarea[placeholder]:not(.placeholder-no-fix)').each(function () {
                 var input = $(this);
 
                 if (input.val() === '' && input.attr("placeholder") !== '') {
                     input.addClass("placeholder").val(input.attr('placeholder'));
                 }
 
-                input.focus(function() {
+                input.focus(function () {
                     if (input.val() == input.attr('placeholder')) {
                         input.val('');
                     }
                 });
 
-                input.blur(function() {
+                input.blur(function () {
                     if (input.val() === '' || input.val() == input.attr('placeholder')) {
                         input.val(input.attr('placeholder'));
                     }
@@ -526,27 +526,27 @@ var App = function() {
     };
 
     // Handle Select2 Dropdowns
-    var handleSelect2 = function() {
+    var handleSelect2 = function () {
         if ($().select2) {
             $.fn.select2.defaults.set("theme", "bootstrap");
             $('.select2me').select2({
-                placeholder: "Select",
-                width: 'auto', 
+                placeholder: "Selecione",
+                width: 'auto',
                 allowClear: true
             });
         }
     };
 
     // handle group element heights
-   var handleHeight = function() {
-       $('[data-auto-height]').each(function() {
+    var handleHeight = function () {
+        $('[data-auto-height]').each(function () {
             var parent = $(this);
             var items = $('[data-height]', parent);
             var height = 0;
             var mode = parent.attr('data-mode');
             var offset = parseInt(parent.attr('data-offset') ? parent.attr('data-offset') : 0);
 
-            items.each(function() {
+            items.each(function () {
                 if ($(this).attr('data-height') == "height") {
                     $(this).css('height', '');
                 } else {
@@ -561,7 +561,7 @@ var App = function() {
 
             height = height + offset;
 
-            items.each(function() {
+            items.each(function () {
                 if ($(this).attr('data-height') == "height") {
                     $(this).css('height', height);
                 } else {
@@ -569,18 +569,141 @@ var App = function() {
                 }
             });
 
-            if(parent.attr('data-related')) {
+            if (parent.attr('data-related')) {
                 $(parent.attr('data-related')).css('height', parent.height());
             }
-       });       
-    }
+        });
+    };
+
+    var handleInputMasks = function () {
+        $(".mask_date").inputmask("d/m/y", {
+            "onincomplete": function () {
+                $(this).closest('.form-group').removeClass('has-success').addClass('has-error');
+//                App.alert({
+//                    type: 'warning',
+//                    message: 'Informe a data corretamente',
+//                    icon: 'fa fa-warning',
+//                    close: true,
+//                    closeInSeconds: 3,
+//                    reset: true
+//                });
+            },
+            "oncomplete": function () {
+                $(this).closest('.form-group').removeClass('has-error');
+            }
+        });
+        $(".mask_cpf").inputmask("999.999.999-99", {
+            autoUnmask: true,
+            "onincomplete": function () {
+                $(this).closest('.form-group').removeClass('has-success').addClass('has-error');
+                App.alert({
+                    type: 'warning',
+                    message: 'Informe o CPF corretamente',
+                    icon: 'fa fa-warning',
+                    close: true,
+                    closeInSeconds: 3,
+                    reset: true
+                });
+            },
+            "oncomplete": function () {
+                $(this).closest('.form-group').removeClass('has-error');
+            }
+        });
+        $(".mask_tel").inputmask("(99) 9999-9999[9]", {
+            "onincomplete": function () {
+                $(this).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            "oncomplete": function () {
+                $(this).closest('.form-group').removeClass('has-error');
+                $(this).focusout(function () {
+                    var phone, element;
+                    element = $(this);
+                    element.inputmask('remove');
+                    phone = element.val().replace(/\D/g, '');
+                    if (phone.length > 10) {
+                        element.inputmask("(99) 99999-999[9]");
+                    } else {
+                        element.inputmask("(99) 9999-9999[9]");
+                    }
+                }).trigger('focusout');
+            }
+        });
+        $(".mask_cep").inputmask("99.999-999", {
+            "onincomplete": function () {
+                $(this).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            "oncomplete": function () {
+                $(this).closest('.form-group').removeClass('has-error');
+            }
+        });
+    };
+
+    var handleBuscaCep = function () {
+        $(".busca_cep").blur(function () {
+            var cep = $(this).val().replace(/\D/g, '');
+            if (cep !== "") {
+                var validacep = /^[0-9]{8}$/;
+                if (validacep.test(cep)) {
+                    $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                        if (!("erro" in dados)) {
+                            $('input[name="endereco"]').val(dados.logradouro);
+                            $('input[name="bairro"]').val(dados.bairro);
+                        } 
+                    });
+                } else {
+                    alert("Formato de CEP inválido.");
+                }
+            }
+        });
+    };
     
+    var handleReadCidades = function () {
+        $('.read_cidades').change(function () {
+            var estado_id = $(this).val();
+            $.ajax({
+                url: 'control_app.php',
+                data: {acao: 'readCidades', id: estado_id},
+                type: 'POST',
+                beforeSend: function () {
+                    $('select[name="id_cidade"]').addClass('spinner');
+                },
+                success: function (res) {
+                    $('select[name="id_cidade"]').html(res);
+                },
+                complete: function () {
+                    $('select[name="id_cidade"]').removeClass('spinner');
+                }
+            });
+        });
+    };
+    
+    var handleEstadoCivil = function () {
+        $('.estado_civil').change(function () {
+            var estado_civil = $(this).val();
+            if (estado_civil === '2' || estado_civil === '4') {
+                $('#div_esposa').show();
+            } else {
+                $('#div_esposa').hide();
+            }
+        });
+    };
+    
+    var handleDatePickers = function () {
+        $('.date-picker').datepicker({
+            rtl: App.isRTL(),
+            orientation: "left",
+            autoclose: true,
+            language: "pt-BR"
+        });
+    };
+
+
     //* END:CORE HANDLERS *//
 
     return {
 
         //main function to initiate the theme
-        init: function() {
+        init: function () {
             //IMPORTANT!!!: Do not modify the core handlers call order.
 
             //Core handlers
@@ -606,15 +729,17 @@ var App = function() {
             handleTextareaAutosize(); // handle autosize textareas
             handleCounterup(); // handle counterup instances
 
+
             //Handle group element heights
             this.addResizeHandler(handleHeight); // handle auto calculating height on window resize
 
             // Hacks
             handleFixInputPlaceholderForIE(); //IE8 & IE9 input placeholder issue fix
+
         },
 
         //main function to initiate core javascript after ajax complete
-        initAjax: function() {
+        initAjax: function () {
             //handleUniform(); // handles custom radio & checkboxes     
             handleiCheck(); // handles custom icheck radio and checkboxes
             handleBootstrapSwitch(); // handle bootstrap switch plugin
@@ -627,30 +752,35 @@ var App = function() {
             handlePopovers(); // handles bootstrap popovers
             handleAccordions(); //handles accordions 
             handleBootstrapConfirmation(); // handle bootstrap confirmations
+            handleInputMasks();
+            handleBuscaCep();
+            handleReadCidades();
+            handleEstadoCivil();
+            handleDatePickers();
         },
 
         //init main components 
-        initComponents: function() {
+        initComponents: function () {
             this.initAjax();
         },
 
         //public function to remember last opened popover that needs to be closed on click
-        setLastPopedPopover: function(el) {
+        setLastPopedPopover: function (el) {
             lastPopedPopover = el;
         },
 
         //public function to add callback a function which will be called on window resize
-        addResizeHandler: function(func) {
+        addResizeHandler: function (func) {
             resizeHandlers.push(func);
         },
 
         //public functon to call _runresizeHandlers
-        runResizeHandlers: function() {
+        runResizeHandlers: function () {
             _runResizeHandlers();
         },
 
         // wrApper function to scroll(focus) to an element
-        scrollTo: function(el, offeset) {
+        scrollTo: function (el, offeset) {
             var pos = (el && el.size() > 0) ? el.offset().top : 0;
 
             if (el) {
@@ -669,12 +799,12 @@ var App = function() {
             }, 'slow');
         },
 
-        initSlimScroll: function(el) {
+        initSlimScroll: function (el) {
             if (!$().slimScroll) {
                 return;
             }
 
-            $(el).each(function() {
+            $(el).each(function () {
                 if ($(this).attr("data-initialized")) {
                     return; // exit
                 }
@@ -704,12 +834,12 @@ var App = function() {
             });
         },
 
-        destroySlimScroll: function(el) {
+        destroySlimScroll: function (el) {
             if (!$().slimScroll) {
                 return;
             }
 
-            $(el).each(function() {
+            $(el).each(function () {
                 if ($(this).attr("data-initialized") === "1") { // destroy existing instance before updating the height
                     $(this).removeAttr("data-initialized");
                     $(this).removeAttr("style");
@@ -741,7 +871,7 @@ var App = function() {
                     var the = $(this);
 
                     // reassign custom attributes
-                    $.each(attrList, function(key, value) {
+                    $.each(attrList, function (key, value) {
                         the.attr(key, value);
                     });
 
@@ -750,12 +880,12 @@ var App = function() {
         },
 
         // function to scroll to the top
-        scrollTop: function() {
+        scrollTop: function () {
             App.scrollTo();
         },
 
         // wrApper function to  block element(indicate loading)
-        blockUI: function(options) {
+        blockUI: function (options) {
             options = $.extend(true, {}, options);
             var html = '';
             if (options.animate) {
@@ -808,10 +938,10 @@ var App = function() {
         },
 
         // wrApper function to  un-block element(finish loading)
-        unblockUI: function(target) {
+        unblockUI: function (target) {
             if (target) {
                 $(target).unblock({
-                    onUnblock: function() {
+                    onUnblock: function () {
                         $(target).css('position', '');
                         $(target).css('zoom', '');
                     }
@@ -821,7 +951,7 @@ var App = function() {
             }
         },
 
-        startPageLoading: function(options) {
+        startPageLoading: function (options) {
             if (options && options.animate) {
                 $('.page-spinner-bar').remove();
                 $('body').append('<div class="page-spinner-bar"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
@@ -831,11 +961,11 @@ var App = function() {
             }
         },
 
-        stopPageLoading: function() {
+        stopPageLoading: function () {
             $('.page-loading, .page-spinner-bar').remove();
         },
 
-        alert: function(options) {
+        alert: function (options) {
 
             options = $.extend(true, {
                 container: "", // alerts parent container(by default placed after the page breadcrumbs)
@@ -882,7 +1012,7 @@ var App = function() {
             }
 
             if (options.closeInSeconds > 0) {
-                setTimeout(function() {
+                setTimeout(function () {
                     $('#' + id).remove();
                 }, options.closeInSeconds * 1000);
             }
@@ -891,12 +1021,12 @@ var App = function() {
         },
 
         //public function to initialize the fancybox plugin
-        initFancybox: function() {
+        initFancybox: function () {
             handleFancybox();
         },
 
         //public helper function to get actual input value(used in IE9 and IE8 due to placeholder attribute not supported)
-        getActualVal: function(el) {
+        getActualVal: function (el) {
             el = $(el);
             if (el.val() === el.attr("placeholder")) {
                 return "";
@@ -905,9 +1035,9 @@ var App = function() {
         },
 
         //public function to get a paremeter by name from URL
-        getURLParameter: function(paramName) {
+        getURLParameter: function (paramName) {
             var searchString = window.location.search.substring(1),
-                i, val, params = searchString.split("&");
+                    i, val, params = searchString.split("&");
 
             for (i = 0; i < params.length; i++) {
                 val = params[i].split("=");
@@ -919,7 +1049,7 @@ var App = function() {
         },
 
         // check for device touch support
-        isTouchDevice: function() {
+        isTouchDevice: function () {
             try {
                 document.createEvent("TouchEvent");
                 return true;
@@ -929,9 +1059,9 @@ var App = function() {
         },
 
         // To get the correct viewport width based on  http://andylangton.co.uk/articles/javascript/get-viewport-size-javascript/
-        getViewPort: function() {
+        getViewPort: function () {
             var e = window,
-                a = 'inner';
+                    a = 'inner';
             if (!('innerWidth' in window)) {
                 a = 'client';
                 e = document.documentElement || document.body;
@@ -943,60 +1073,60 @@ var App = function() {
             };
         },
 
-        getUniqueID: function(prefix) {
+        getUniqueID: function (prefix) {
             return 'prefix_' + Math.floor(Math.random() * (new Date()).getTime());
         },
 
         // check IE8 mode
-        isIE8: function() {
+        isIE8: function () {
             return isIE8;
         },
 
         // check IE9 mode
-        isIE9: function() {
+        isIE9: function () {
             return isIE9;
         },
 
         //check RTL mode
-        isRTL: function() {
+        isRTL: function () {
             return isRTL;
         },
 
         // check IE8 mode
-        isAngularJsApp: function() {
+        isAngularJsApp: function () {
             return (typeof angular == 'undefined') ? false : true;
         },
 
-        getAssetsPath: function() {
+        getAssetsPath: function () {
             return assetsPath;
         },
 
-        setAssetsPath: function(path) {
+        setAssetsPath: function (path) {
             assetsPath = path;
         },
 
-        setGlobalImgPath: function(path) {
+        setGlobalImgPath: function (path) {
             globalImgPath = path;
         },
 
-        getGlobalImgPath: function() {
+        getGlobalImgPath: function () {
             return assetsPath + globalImgPath;
         },
 
-        setGlobalPluginsPath: function(path) {
+        setGlobalPluginsPath: function (path) {
             globalPluginsPath = path;
         },
 
-        getGlobalPluginsPath: function() {
+        getGlobalPluginsPath: function () {
             return assetsPath + globalPluginsPath;
         },
 
-        getGlobalCssPath: function() {
+        getGlobalCssPath: function () {
             return assetsPath + globalCssPath;
         },
 
         // get layout color code by color name
-        getBrandColor: function(name) {
+        getBrandColor: function (name) {
             if (brandColors[name]) {
                 return brandColors[name];
             } else {
@@ -1004,21 +1134,21 @@ var App = function() {
             }
         },
 
-        getResponsiveBreakpoint: function(size) {
+        getResponsiveBreakpoint: function (size) {
             // bootstrap responsive breakpoints
             var sizes = {
-                'xs' : 480,     // extra small
-                'sm' : 768,     // small
-                'md' : 992,     // medium
-                'lg' : 1200     // large
+                'xs': 480, // extra small
+                'sm': 768, // small
+                'md': 992, // medium
+                'lg': 1200     // large
             };
 
-            return sizes[size] ? sizes[size] : 0; 
+            return sizes[size] ? sizes[size] : 0;
         }
     };
 
 }();
 
-jQuery(document).ready(function() {    
-   App.init(); // init metronic core componets
+jQuery(document).ready(function () {
+    App.init(); // init metronic core componets
 });
