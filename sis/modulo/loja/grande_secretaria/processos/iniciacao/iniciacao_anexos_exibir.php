@@ -1,13 +1,13 @@
 <?php
-require_once ('../../../../../config/dtsSis.php');
-function_exists(myAutSis) ? myAutSis('3') : header('Location: ' . BASE . '/sis/403.php');
+require_once ('../../../../../../config/dtsSis.php');
+function_exists(myAutSis) ? myAutSis('10') : header('Location: ' . BASE . '/sis/403.php');
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $documento = filter_input(INPUT_GET, 'doc');
 $readAnexo = read('glepaweb_anexos_processos', "WHERE id_processo = '$id'");
 if ($readAnexo) {
     foreach ($readAnexo as $anexo => $value)
         ;
-    if (!file_exists('../../../../../uploads/processos_anexo/' . $documento)) {
+    if (!file_exists('../../../../../../uploads/processos_anexo/' . $documento)) {
         header('Location: ' . BASE . '/sis/404.php');
     }
 } else {
@@ -21,23 +21,23 @@ if ($readAnexo) {
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/processos_pendentes.php" class="ajaxify">Processos Pendentes</a>
+            <a href="modulo/loja/grande_secretaria/processos/processos.php" class="ajaxify">Processos em andamento</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/processos_editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Editar Processo</a>
+            <a href="modulo/loja/grande_secretaria/processos/processos_editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Editar Processo</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Analisar Processo</a>
+            <a href="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao_editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Analisar Processo</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Anexos</a>
+            <a href="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao_anexos.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Anexos</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $documento; ?>" class="ajaxify">Visualizar Anexo</a>
+            <a href="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $documento; ?>" class="ajaxify">Visualizar Anexo</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -69,7 +69,7 @@ if ($readAnexo) {
 </div>
 <h3 class="page-title"> 
     <div class="btn-group pull-right">
-        <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos.php?id=<?php echo $value['id_processo']; ?>" class="btn btn-outline blue btn-sm ajaxify"><i class="fa fa-angle-left"></i> Voltar </a>
+        <a href="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao_anexos.php?id=<?php echo $value['id_processo']; ?>" class="btn btn-outline blue btn-sm ajaxify"><i class="fa fa-angle-left"></i> Voltar </a>
     </div>
     Visualizar 
     <small>documento anexado</small>

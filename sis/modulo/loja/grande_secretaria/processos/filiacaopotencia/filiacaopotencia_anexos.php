@@ -1,6 +1,6 @@
 <?php
-require_once ('../../../../../config/dtsSis.php');
-function_exists(myAutSis) ? myAutSis('3') : header('Location: ' . BASE . '/sis/403.php');
+require_once ('../../../../../../config/dtsSis.php');
+function_exists(myAutSis) ? myAutSis('10') : header('Location: ' . BASE . '/sis/403.php');
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $readAnexos = read('glepaweb_anexos_processos', "WHERE id_processo = '$id'");
 if ($readAnexos) {
@@ -22,19 +22,19 @@ if ($readAnexos) {
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/processos_pendentes.php" class="ajaxify">Processos Pendentes</a>
+            <a href="modulo/loja/grande_secretaria/processos/processos.php" class="ajaxify">Processos em andamento</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/processos_editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Editar Processo</a>
+            <a href="modulo/loja/grande_secretaria/processos/processos_editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Editar Processo</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Analisar Processo</a>
+            <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Analisar Processo</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Anexos</a>
+            <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Anexos</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -66,9 +66,9 @@ if ($readAnexos) {
 </div>
 <h3 class="page-title"> 
     <div class="btn-group pull-right">
-        <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-editar.php?id=<?php echo $value['id_processo']; ?>" class="btn btn-outline blue btn-sm ajaxify"><i class="fa fa-angle-left"></i> Voltar </a>
+        <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_editar.php?id=<?php echo $value['id_processo']; ?>" class="btn btn-outline blue btn-sm ajaxify"><i class="fa fa-angle-left"></i> Voltar </a>
     </div>
-    Iniciação 
+    Filiação 
     <small>documentos anexados</small>
 </h3>
 <?php
@@ -103,15 +103,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['proposta1'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['proposta1'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_proposta1" >
+                            <div class="fileinput fileinput-new <?php echo(($value['proposta1'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['proposta1'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_proposta1" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="proposta1" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['proposta1'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['proposta1'])) ? 'hide' : '') ?>" id="opcao_proposta1">
+                            <div class="<?php echo(!($value['proposta1'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['proposta1'])) ? 'hide' : '') ?>" id="opcao_proposta1">
                                 <a name="proposta1" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['proposta1'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['proposta1'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -123,15 +123,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['proposta2'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['proposta2'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_proposta2" >
+                            <div class="fileinput fileinput-new <?php echo(($value['proposta2'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['proposta2'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_proposta2" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="proposta2" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['proposta2'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['proposta2'])) ? 'hide' : '') ?>" id="opcao_proposta2">
+                            <div class="<?php echo(!($value['proposta2'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['proposta2'])) ? 'hide' : '') ?>" id="opcao_proposta2">
                                 <a name="proposta2" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['proposta2'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['proposta2'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -143,15 +143,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['proposta3'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['proposta3'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_proposta3" >
+                            <div class="fileinput fileinput-new <?php echo(($value['proposta3'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['proposta3'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_proposta3" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="proposta3" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['proposta3'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['proposta3'])) ? 'hide' : '') ?>" id="opcao_proposta3">
+                            <div class="<?php echo(!($value['proposta3'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['proposta3'])) ? 'hide' : '') ?>" id="opcao_proposta3">
                                 <a name="proposta3" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['proposta3'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['proposta3'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -163,15 +163,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['proposta4'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['proposta4'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_proposta4" >
+                            <div class="fileinput fileinput-new <?php echo(($value['proposta4'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['proposta4'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_proposta4" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="proposta4" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['proposta4'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['proposta4'])) ? 'hide' : '') ?>" id="opcao_proposta4">
+                            <div class="<?php echo(!($value['proposta4'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['proposta4'])) ? 'hide' : '') ?>" id="opcao_proposta4">
                                 <a name="proposta4" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['proposta4'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['proposta4'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -183,35 +183,35 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['rg'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['rg'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_rg" >
+                            <div class="fileinput fileinput-new <?php echo(($value['rg'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['rg'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_rg" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="rg" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['rg'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['rg'])) ? 'hide' : '') ?>" id="opcao_rg">
+                            <div class="<?php echo(!($value['rg'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['rg'])) ? 'hide' : '') ?>" id="opcao_rg">
                                 <a name="rg" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['rg'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['rg'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td> Certidão de Nascimento </td>
+                        <td> Certidão de <?php echo (($dados['id_estado_civil'] === '2' || $dados['id_estado_civil'] === '4') ? 'Casamento' : 'Nascimento') ;?> </td>
                         <td> 
                             <div class="progress progress-striped active" id="certidao" style="display: none">
                                 <div class="progress-bar progress-bar-success certidao" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['certidao'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao" >
+                            <div class="fileinput fileinput-new <?php echo(($value['certidao'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="certidao" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['certidao'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao'])) ? 'hide' : '') ?>" id="opcao_certidao">
+                            <div class="<?php echo(!($value['certidao'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao'])) ? 'hide' : '') ?>" id="opcao_certidao">
                                 <a name="certidao" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -223,15 +223,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['renda'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['renda'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_renda" >
+                            <div class="fileinput fileinput-new <?php echo(($value['renda'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['renda'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_renda" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="renda" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['renda'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['renda'])) ? 'hide' : '') ?>" id="opcao_renda">
+                            <div class="<?php echo(!($value['renda'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['renda'])) ? 'hide' : '') ?>" id="opcao_renda">
                                 <a name="renda" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['renda'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['renda'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -243,15 +243,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['medico'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['medico'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_medico" >
+                            <div class="fileinput fileinput-new <?php echo(($value['medico'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['medico'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_medico" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="medico" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['medico'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['medico'])) ? 'hide' : '') ?>" id="opcao_medico">
+                            <div class="<?php echo(!($value['medico'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['medico'])) ? 'hide' : '') ?>" id="opcao_medico">
                                 <a name="medico" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['medico'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['medico'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -263,15 +263,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['certidao_negativa_judiciario'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_negativa_judiciario'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_negativa_judiciario" >
+                            <div class="fileinput fileinput-new <?php echo(($value['certidao_negativa_judiciario'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_negativa_judiciario'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_negativa_judiciario" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="certidao_negativa_judiciario" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['certidao_negativa_judiciario'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_negativa_judiciario'])) ? 'hide' : '') ?>" id="opcao_certidao_negativa_judiciario">
+                            <div class="<?php echo(!($value['certidao_negativa_judiciario'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_negativa_judiciario'])) ? 'hide' : '') ?>" id="opcao_certidao_negativa_judiciario">
                                 <a name="certidao_negativa_judiciario" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_negativa_judiciario'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_negativa_judiciario'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -283,15 +283,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['certidao_negativa_federal'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_negativa_federal'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_negativa_federal" >
+                            <div class="fileinput fileinput-new <?php echo(($value['certidao_negativa_federal'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_negativa_federal'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_negativa_federal" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="certidao_negativa_federal" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['certidao_negativa_federal'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_negativa_federal'])) ? 'hide' : '') ?>" id="opcao_certidao_negativa_federal">
+                            <div class="<?php echo(!($value['certidao_negativa_federal'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_negativa_federal'])) ? 'hide' : '') ?>" id="opcao_certidao_negativa_federal">
                                 <a name="certidao_negativa_federal" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_negativa_federal'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_negativa_federal'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -303,15 +303,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['certidao_negativa_protesto'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_negativa_protesto'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_negativa_protesto" >
+                            <div class="fileinput fileinput-new <?php echo(($value['certidao_negativa_protesto'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_negativa_protesto'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_negativa_protesto" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="certidao_negativa_protesto" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['certidao_negativa_protesto'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_negativa_protesto'])) ? 'hide' : '') ?>" id="opcao_certidao_negativa_protesto">
+                            <div class="<?php echo(!($value['certidao_negativa_protesto'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_negativa_protesto'])) ? 'hide' : '') ?>" id="opcao_certidao_negativa_protesto">
                                 <a name="certidao_negativa_protesto" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_negativa_protesto'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_negativa_protesto'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -326,15 +326,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['beneficencia'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['beneficencia'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_beneficencia" >
+                            <div class="fileinput fileinput-new <?php echo(($value['beneficencia'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['beneficencia'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_beneficencia" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="beneficencia" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['beneficencia'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['beneficencia'])) ? 'hide' : '') ?>" id="opcao_beneficencia">
+                            <div class="<?php echo(!($value['beneficencia'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['beneficencia'])) ? 'hide' : '') ?>" id="opcao_beneficencia">
                                 <a name="beneficencia" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['beneficencia'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['beneficencia'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -350,15 +350,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['certidao_demolay'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_demolay'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_demolay" >
+                            <div class="fileinput fileinput-new <?php echo(($value['certidao_demolay'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_demolay'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_demolay" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="certidao_demolay" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['certidao_demolay'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_demolay'])) ? 'hide' : '') ?>" id="opcao_certidao_demolay">
+                            <div class="<?php echo(!($value['certidao_demolay'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_demolay'])) ? 'hide' : '') ?>" id="opcao_certidao_demolay">
                                 <a name="certidao_demolay" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_demolay'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_demolay'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -374,15 +374,15 @@ if($idade > 65){
                             </div>
                         </td>
                         <td align="right">
-                            <div class="fileinput fileinput-new <?php echo(($value['certidao_militar'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_militar'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_militar" >
+                            <div class="fileinput fileinput-new <?php echo(($value['certidao_militar'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_militar'])) ? 'hide' : '') ?>" data-provides="fileinput" id="input_certidao_militar" >
                                 <span class="btn green btn-file">
                                     <span class="fileinput-new"> Anexar </span>
                                     <span class="fileinput-exists"> Alterar </span>
                                     <input type="file" name="certidao_militar" accept="application/pdf"> </span>
                             </div>
-                            <div class="<?php echo(!($value['certidao_militar'] != '' && file_exists('../../../../../uploads/processos_anexo/' . $value['certidao_militar'])) ? 'hide' : '') ?>" id="opcao_certidao_militar">
+                            <div class="<?php echo(!($value['certidao_militar'] != '' && file_exists('../../../../../../uploads/processos_anexo/' . $value['certidao_militar'])) ? 'hide' : '') ?>" id="opcao_certidao_militar">
                                 <a name="certidao_militar" class="btn red btn_exclui"><i class="fa fa-trash-o"></i></a>
-                                <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos-exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_militar'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
+                                <a href="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia_anexos_exibir.php?id=<?php echo $value['id_processo']; ?>&doc=<?php echo $value['certidao_militar'] ?>" class="btn blue ajaxify"><i class="fa fa-search"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -391,12 +391,7 @@ if($idade > 65){
                     ?>
                 </tbody>
             </table>
-            <div class="form-actions">
-                <a class="btn red reprovaAnexos" id="<?php echo $value['id_processo']; ?>"><i class="fa fa-ban"></i> Reprovar </a>
-                <a class="btn green pull-right aprovaAnexos" id="<?php echo $value['id_processo']; ?>"><i class="fa fa-check"></i> Aprovar </a>
-            </div>
         </form>
-
     </div>
 </div>
-<script type="text/javascript" src="modulo/grande_secretaria/processos/iniciacao/iniciacao.js"></script>
+<script type="text/javascript" src="modulo/loja/grande_secretaria/processos/filiacaopotencia/filiacaopotencia.js"></script>

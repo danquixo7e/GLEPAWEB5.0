@@ -79,7 +79,7 @@ $('.aprovaDados').click(function () {
                     if (resposta.sucesso === true) {
                         swal("Aprovado!", "Os dados foram aprovados.", "success");
                         $.ajax({
-                            url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos.php?id=' + id_processo,
+                            url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao_anexos.php?id=' + id_processo,
                             success: function (res) {
                                 $('.page-content .page-content-body').html(res);
                                 Layout.fixContentHeight();
@@ -277,7 +277,7 @@ formDados.validate({
                         if (resposta.sucesso === true) {
                             swal("Alterado!", "Suas alterações foram realizadas com sucesso.", "success");
                             $.ajax({
-                                url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao-dados.php?id=' + id_processo,
+                                url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao_dados.php?id=' + id_processo,
                                 success: function (res) {
                                     $('.page-content .page-content-body').html(res);
                                     Layout.fixContentHeight();
@@ -332,7 +332,7 @@ $('form[name="formAnexos"] input[type="file"]').change(function () {
                 resposta = $.parseJSON(res);
                 if (resposta.sucesso === true) {
                     $.ajax({
-                        url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos.php?id=' + id_processo,
+                        url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao_anexos.php?id=' + id_processo,
                         success: function (res) {
                             $('.page-content .page-content-body').html(res);
                             Layout.fixContentHeight();
@@ -475,7 +475,7 @@ $('.aprovaAnexos').click(function () {
                     if (resposta.sucesso === true) {
                         swal("Aprovado!", "Os anexos foram aprovados.", "success");
                         $.ajax({
-                            url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao-data.php?id=' + id_processo,
+                            url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao_data.php?id=' + id_processo,
                             success: function (res) {
                                 $('.page-content .page-content-body').html(res);
                                 Layout.fixContentHeight();
@@ -522,7 +522,7 @@ $('.alteraData').click(function () {
                     if (resposta.sucesso === true) {
                         swal("Alterado!", "Suas alterações foram realizadas com sucesso.", "success");
                         $.ajax({
-                            url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao-data.php?id=' + id_processo,
+                            url: 'modulo/grande_secretaria/processos/iniciacao/iniciacao_data.php?id=' + id_processo,
                             success: function (res) {
                                 $('.page-content .page-content-body').html(res);
                                 Layout.fixContentHeight();

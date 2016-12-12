@@ -579,14 +579,6 @@ var App = function () {
         $(".mask_date").inputmask("d/m/y", {
             "onincomplete": function () {
                 $(this).closest('.form-group').removeClass('has-success').addClass('has-error');
-//                App.alert({
-//                    type: 'warning',
-//                    message: 'Informe a data corretamente',
-//                    icon: 'fa fa-warning',
-//                    close: true,
-//                    closeInSeconds: 3,
-//                    reset: true
-//                });
             },
             "oncomplete": function () {
                 $(this).closest('.form-group').removeClass('has-error');
@@ -697,7 +689,7 @@ var App = function () {
         });
     };
 
-
+    
     //* END:CORE HANDLERS *//
 
     return {
@@ -757,6 +749,7 @@ var App = function () {
             handleReadCidades();
             handleEstadoCivil();
             handleDatePickers();
+            handleVerificaCpf();
         },
 
         //init main components 

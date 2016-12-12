@@ -56,9 +56,9 @@ session_start();
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" placeholder="E-mail" name="email" required/> </div>
+                                    <input style="text-transform: lowercase" class="form-control form-control-solid placeholder-no-fix form-group" type="text" placeholder="e-mail" name="email" required/> </div>
                                 <div class="col-xs-6">
-                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Senha" name="senha" required/> </div>
+                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="senha" name="senha" required/> </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">

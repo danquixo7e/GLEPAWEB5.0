@@ -65,6 +65,8 @@ if (!$_SESSION['autGlepa']) {
                     setArq('includes/grande_tesouraria/top_menu');
                 }elseif($_SESSION['autGlepa']['id_modulo'] === '5'){
                     setArq('includes/beneficencia_maconica/top_menu');
+                }elseif($_SESSION['autGlepa']['id_modulo'] === '10'){
+                    setArq('includes/loja/top_menu');
                 }
                 ?>
                 <!-- END TOP NAVIGATION MENU -->
@@ -82,6 +84,8 @@ if (!$_SESSION['autGlepa']) {
                 setArq('includes/grande_tesouraria/sidebar');
             }elseif($_SESSION['autGlepa']['id_modulo'] === '5'){
                 setArq('includes/beneficencia_maconica/sidebar');
+            }elseif($_SESSION['autGlepa']['id_modulo'] === '10'){
+                setArq('includes/loja/sidebar');
             }
             ?>
             <!-- END SIDEBAR -->

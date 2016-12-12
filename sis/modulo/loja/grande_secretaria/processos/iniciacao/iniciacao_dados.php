@@ -1,6 +1,6 @@
 <?php
-require_once ('../../../../../config/dtsSis.php');
-function_exists(myAutSis) ? myAutSis('3') : header('Location: ' . BASE . '/sis/403.php');
+require_once ('../../../../../../config/dtsSis.php');
+function_exists(myAutSis) ? myAutSis('10') : header('Location: ' . BASE . '/sis/403.php');
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $readDados = read('glepaweb_dados_processos', "WHERE id_processo = '$id'");
 if ($readDados) {
@@ -17,19 +17,19 @@ if ($readDados) {
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/processos_pendentes.php" class="ajaxify">Processos Pendentes</a>
+            <a href="modulo/loja/grande_secretaria/processos/processos.php" class="ajaxify">Abrir Processo</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/processos_editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Editar Processo</a>
+            <a href="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao.php" class="ajaxify">Iniciação</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Analisar Processo</a>
+            <a href="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao_editar.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Analisar Processo</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-dados.php?id=<?php echo $value['id_processo']; ?>" class="ajaxify">Dados Pessoais</a>
+            <a href="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao_dados.php?id=<?php echo $value['id_processo'] ;?>" class="ajaxify">Dados Pessoais</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -61,7 +61,7 @@ if ($readDados) {
 </div>
 <h3 class="page-title"> 
     <div class="btn-group pull-right">
-        <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-editar.php?id=<?php echo $value['id_processo']; ?>" class="btn btn-outline blue btn-sm ajaxify"><i class="fa fa-angle-left"></i> Voltar </a>
+        <a href="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao_editar.php?id=<?php echo $value['id_processo']; ?>" class="btn btn-outline blue btn-sm ajaxify"><i class="fa fa-angle-left"></i> Voltar </a>
     </div>
     Iniciação 
     <small>dados pessoais</small>
@@ -129,10 +129,12 @@ if ($readDados) {
                             <input type="text" class="form-control mask_cep busca_cep" name="cep" value="<?php echo $value['cep'] ? $value['cep'] : '' ?>" /> </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Endereço</label>
-                    <div class="input-icon right"><i class="fa "></i>
-                        <input type="text" class="form-control uppercase " name="endereco" value="<?php echo $value['endereco'] ? $value['endereco'] : '' ?>" />
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label">Endereço</label>
+                        <div class="input-icon right"><i class="fa "></i>
+                            <input type="text" class="form-control uppercase " name="endereco" value="<?php echo $value['endereco'] ? $value['endereco'] : '' ?>" />
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -338,11 +340,9 @@ if ($readDados) {
             </div>
             <div class="form-actions">
                 <button type="reset" class="btn default"><i class="fa fa-times"></i> Cancelar</button>
-                <a class="btn red reprovaDados" id="<?php echo $value['id_processo'] ;?>"><i class="fa fa-ban"></i> Reprovar </a>
-                <button type="submit" class="btn blue"><i class="fa fa-save"></i> Salvar Alterações</button>
-                <a class="btn green pull-right aprovaDados" id="<?php echo $value['id_processo'] ;?>"><i class="fa fa-check"></i> Aprovar </a>
+                <button type="submit" class="btn blue"><i class="fa fa-save"></i> Enviar</button>
             </div>
         </form>
     </div>
 </div>
-<script type="text/javascript" src="modulo/grande_secretaria/processos/iniciacao/iniciacao.js"></script>
+<script type="text/javascript" src="modulo/loja/grande_secretaria/processos/iniciacao/iniciacao.js"></script>

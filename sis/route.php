@@ -54,15 +54,15 @@ if (!$_SESSION['autRoute']) {
     <body class="">
         <div class="page-lock">
             <div class="page-logo">
-                <a class="brand" href="index.html">
-                    <img src="assets/pages/img/logo-big.png" alt="logo" /> </a>
+                <a class="brand" href="index.php">
+                    <img src="assets/pages/img/logo.png" alt="logo" /> </a>
             </div>
             <div class="page-body">
                 <img class="page-lock-img" src="assets/pages/media/profile/profile.jpg" alt="">
                 <div class="page-lock-info">
                     <h1>Perfil</h1>
                     <span class="email"> bob@keenthemes.com </span>
-                    <form class="form-inline" action="index.html">
+                    <form class="form-inline">
                         <div class="input-group input-medium">
                             
                             <span class="input-group-btn">
@@ -80,7 +80,7 @@ if (!$_SESSION['autRoute']) {
                 <div class="page-lock-info">
                     <h1><?php echo get(glepaweb_modulos, id, $value['id_modulo'], modulo) ;?></h1>
                     <span class="email"> <?php echo get(glepaweb_cargos, id, $value['id_cargo'], cargo) ;?> </span>
-                    <form class="form-inline" action="index.html">
+                    <form class="form-inline">
                         <div class="input-group input-medium">
                             
                             <span class="input-group-btn">

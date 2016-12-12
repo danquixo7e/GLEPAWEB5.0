@@ -33,7 +33,7 @@ if ($readProcesso) {
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-editar.php?id=<?php echo $value['id']; ?>" class="ajaxify">Analisar Processo</a>
+            <a href="modulo/grande_secretaria/processos/iniciacao/iniciacao_editar.php?id=<?php echo $value['id']; ?>" class="ajaxify">Analisar Processo</a>
         </li>
     </ul>
 </div>
@@ -68,7 +68,7 @@ if ($readProcesso) {
                     <td class="table-status">
                         <?php
                         if (($value['id_status'] === '2') && $dados['aprovado'] !== '1') {
-                            echo '<a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-dados.php?id=' . $value['id'] . '" class="ajaxify"><i class="icon-arrow-right font-blue"></i></a>';
+                            echo '<a href="modulo/grande_secretaria/processos/iniciacao/iniciacao_dados.php?id=' . $value['id'] . '" class="ajaxify"><i class="icon-arrow-right font-blue"></i></a>';
                         }
                         ?>
                     </td>
@@ -79,17 +79,17 @@ if ($readProcesso) {
                             }
                         ?>
                     </td>
-                    <td class="table-desc"> Dados pessoais do <?php echo ($value['id_tipo'] === '1' ? 'candidato' : get(glepa_membros, id, $value['id_membro'], nome)) ;?> </td>
+                    <td class="table-desc"> Dados pessoais do candidato</td>
                     <td class="table-download"><i class="icon-<?php echo ($dados['aprovado'] === '1' ? 'like font-blue' : 'clock font-yellow-crusta'); ?> "></i></td>
                 </tr>
                 <?php
-                if($dados['aprovado'] == '1'){
+                if($dados['aprovado'] === '1'){
                 ?>
                 <tr>
                     <td class="table-status">
                         <?php
                         if (($value['id_status'] === '2') && $anexos['aprovado'] !== '1') {
-                            echo '<a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-anexos.php?id=' . $value['id'] . '" class="ajaxify"><i class="icon-arrow-right font-blue"></i></a>';
+                            echo '<a href="modulo/grande_secretaria/processos/iniciacao/iniciacao_anexos.php?id=' . $value['id'] . '" class="ajaxify"><i class="icon-arrow-right font-blue"></i></a>';
                         }
                         ?>
                     </td>
@@ -105,13 +105,13 @@ if ($readProcesso) {
                 </tr>
                 <?php
                 }
-                if($anexos['aprovado'] == '1'){
+                if($anexos['aprovado'] === '1'){
                 ?>
                 <tr>
                     <td class="table-status">
                         <?php
                         if ($value['data_cerimonial_aprovado'] === '0') {
-                            echo '<a href="modulo/grande_secretaria/processos/iniciacao/iniciacao-data.php?id=' . $value['id'] . '" class="ajaxify"><i class="icon-arrow-right font-blue"></i></a>';
+                            echo '<a href="modulo/grande_secretaria/processos/iniciacao/iniciacao_data.php?id=' . $value['id'] . '" class="ajaxify"><i class="icon-arrow-right font-blue"></i></a>';
                         }
                         ?>
                     </td>

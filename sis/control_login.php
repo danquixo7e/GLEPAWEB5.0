@@ -11,7 +11,7 @@ switch ($acao){
             foreach ($readUser as $users);
             if($users['status'] == '1'){
                 setcookie('autGlepa','',time()+3600,'/');
-                if($users['id_modulo'] === '10'){
+                if($users['id_modulo'] === '11'){
                     $_SESSION['autGlepa'] = $users;
                     $retorno['sucesso'] = true;
                 }else{

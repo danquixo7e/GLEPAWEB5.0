@@ -22,7 +22,7 @@ switch ($acao){
         $readDados = read('glepaweb_dados_processos',"WHERE id_processo = '$id'");
         if($readDados){
             foreach ($readDados as $dados);
-            $o['comentario'] = strtoupper(filter_input(INPUT_POST, 'comentario', FILTER_SANITIZE_SPECIAL_CHARS));
+            $o['comentario'] = formNome(filter_input(INPUT_POST, 'comentario', FILTER_SANITIZE_SPECIAL_CHARS));
             $o['id_processo'] = $dados['id_processo'];
             $o['data'] = date('Y-m-d H:i:s');
             $o['id_usuario'] = $_SESSION['autGlepa']['id'];
@@ -31,7 +31,6 @@ switch ($acao){
             $f['id_status'] = '3';
             update('glepaweb_processos', $f, "id = '$dados[id_processo]'");
             $p['enviado'] = '0';
-            $p['data_enviado'] = '';
             update('glepaweb_dados_processos', $p, "id = '$dados[id]'");
             $retorno['sucesso'] = true;
         }else{
@@ -87,6 +86,7 @@ switch ($acao){
                 $f['data_nascimento_esposa']    = filter_input(INPUT_POST, 'data_nascimento_esposa');
                 $f['data_nascimento_esposa']    = formDate($f['data_nascimento_esposa']);
             }
+            
             update('glepaweb_dados_processos', $f, "id_processo = '$id'");
             $retorno['sucesso'] = true;
         }else{
@@ -127,7 +127,6 @@ switch ($acao){
             if (file_exists($pasta . $documentos[$documento]) && !is_dir($pasta . $documentos[$documento])) {
                 unlink($pasta . $documentos[$documento]);
                 $f[$documento] = NULL;
-                $f['data_' . $documento] = '0000-00-00';
                 update('glepaweb_anexos_processos', $f, "id_processo = '$id'");
                 $retorno['sucesso'] = true;
             } else {
@@ -143,7 +142,7 @@ switch ($acao){
         $readAnexos = read('glepaweb_anexos_processos', "WHERE id_processo = '$id'");
         if ($readAnexos) {
             foreach ($readAnexos as $anexos);
-            $o['comentario'] = strtoupper(filter_input(INPUT_POST, 'comentario',FILTER_SANITIZE_SPECIAL_CHARS));
+            $o['comentario'] = formNome(filter_input(INPUT_POST, 'comentario',FILTER_SANITIZE_SPECIAL_CHARS));
             $o['id_processo'] = $anexos['id_processo'];
             $o['data'] = date('Y-m-d H:i:s');
             $o['id_usuario'] = $_SESSION['autGlepa']['id'];
@@ -152,7 +151,6 @@ switch ($acao){
             $f['id_status'] = '3';
             update('glepaweb_processos', $f, "id = '$anexos[id_processo]'");
             $p['enviado'] = '0';
-            $p['data_enviado'] = '';
             update('glepaweb_anexos_processos', $p, "id_processo = '$anexos[id_processo]'");
             $retorno['sucesso'] = true;
         }else{
@@ -199,7 +197,6 @@ switch ($acao){
             create('glepaweb_comentarios_processos', $o);
             $f['id_etapa'] = '4';
             $f['id_status'] = '3';
-            $f['data_cerimonial'] = '';
             update('glepaweb_processos', $f, "id = '$id'");
             $retorno['sucesso'] = true;
         }else{
@@ -228,7 +225,7 @@ switch ($acao){
                 $b['mes'] = date('m');
                 create('glepaweb_boletos',$b);
             }else{
-                $f['pagamento_glepa'] = '1';
+                $f['pagamento_taxa'] = '1';
             }
             $idade = calculaIdade($dados['data_nascimento']);
             if($idade < 66){
