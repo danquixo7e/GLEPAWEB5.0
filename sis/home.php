@@ -1,8 +1,2 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<button class="btn btn-large" id="enviar" >ENVIAR EMAIL</button>
+<script type="text/javascript" src="home.js"></script>

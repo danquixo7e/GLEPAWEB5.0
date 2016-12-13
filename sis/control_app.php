@@ -14,5 +14,17 @@ switch ($acao){
             }
         }
         break;
+    case 'sendEmail':
+        $readMail = read('glepaweb_usuarios');
+        if($readMail){
+            foreach ($readMail as $mail);
+            $msg = 'Teste';
+            sendMail('Teste de Email', $msg, MAILUSER, SITENAME, $mail['email'], $mail['nome']);
+            $retorno['sucesso'] = true;
+        }else{
+            $retorno['sucesso'] = false;
+        }
+        echo json_encode($retorno);
+        break;
     default: echo 'Error';
 }
